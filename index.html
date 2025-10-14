@@ -1,130 +1,70 @@
 <!doctype html>
-<html lang="pl">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Goju - Personal Site</title>
-  <meta name="description" content="Goju - dev, maker, vibes.">
-  <meta property="og:title" content="Goju - Personal Site">
-  <meta property="og:description" content="Dev, maker, vibes.">
-  <meta property="og:type" content="website">
-  <meta name="color-scheme" content="light dark">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Goju — Personal Site (Coming Soon)</title>
+  <meta name="description" content="Goju — developer & maker. Minimal placeholder site for GitHub Pages." />
+  <meta name="color-scheme" content="light dark" />
+  <meta property="og:title" content="Goju — Personal Site" />
+  <meta property="og:description" content="Developer & maker. Minimal placeholder site." />
+  <meta property="og:type" content="website" />
   <style>
     :root {
-      --bg: #0f0f12;
-      --fg: #f6f7fb;
-      --muted: #a8adbe;
-      --brand: #7c6cff;
-      --card: #16171c;
-      --accent: #50e3c2;
+      --bg:#0f1115; --fg:#f7f8fc; --muted:#a7adbd; --card:#171a21; --brand:#7c6cff; --ring:#50e3c2;
     }
     @media (prefers-color-scheme: light) {
-      :root { --bg:#ffffff; --fg:#0f1222; --muted:#5c6275; --card:#f4f6fb; }
+      :root { --bg:#ffffff; --fg:#0f1222; --muted:#5b6173; --card:#f3f5fb; }
     }
     * { box-sizing: border-box }
     html { scroll-behavior: smooth }
-    body {
-      margin: 0; font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
-      background: var(--bg); color: var(--fg);
-    }
-    a { color: var(--brand); text-decoration: none }
-    a:hover { text-decoration: underline }
-    header {
-      position: sticky; top: 0; z-index: 10; backdrop-filter: blur(8px);
-      background: color-mix(in oklab, var(--bg) 85%, transparent);
-      border-bottom: 1px solid color-mix(in oklab, var(--fg) 12%, transparent);
-    }
-    .nav { max-width: 1000px; margin: 0 auto; padding: 10px 16px; display: flex; align-items: center; gap: 16px }
-    .nav .brand { font-weight: 700; letter-spacing: .3px }
-    .nav ul { list-style: none; display: flex; gap: 16px; margin: 0 0 0 auto; padding: 0 }
-    .container { max-width: 1000px; margin: 0 auto; padding: 40px 16px }
-    .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; align-items: center }
-    .hero h1 { font-size: clamp(32px, 6vw, 56px); line-height: 1.05; margin: 0 0 12px }
-    .hero p { color: var(--muted); margin: 0 0 16px }
-    .pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border: 1px solid color-mix(in oklab, var(--fg) 14%, transparent); border-radius: 999px; font-size: 14px }
-    .btns { display: flex; gap: 12px; margin-top: 18px; flex-wrap: wrap }
-    .btn { padding: 10px 14px; border-radius: 12px; border: 1px solid color-mix(in oklab, var(--fg) 14%, transparent) }
-    .btn.-fill { background: linear-gradient(135deg, var(--brand), var(--accent)); color: #0b0b0e; font-weight: 700; border: none }
-    .grid { display: grid; gap: 16px }
-    .grid.cols-3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) }
-    .card { background: var(--card); border: 1px solid color-mix(in oklab, var(--fg) 10%, transparent); border-radius: 16px; padding: 18px }
-    .card h3 { margin: 0 0 6px; font-size: 18px }
-    .card p { margin: 0; color: var(--muted) }
-    section h2 { margin: 32px 0 10px; font-size: 22px; letter-spacing: .2px }
-    footer { border-top: 1px solid color-mix(in oklab, var(--fg) 12%, transparent); color: var(--muted) }
-    .social { display: flex; gap: 12px; flex-wrap: wrap }
-    .avatar { width: 160px; aspect-ratio: 1; border-radius: 18px; background: var(--card); display: grid; place-items: center; font-size: 48px; border: 1px solid color-mix(in oklab, var(--fg) 10%, transparent) }
-    @media (max-width: 800px) { .hero { grid-template-columns: 1fr } }
+    body { margin: 0; font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; background: var(--bg); color: var(--fg); }
+    .wrap { min-height: 100svh; display: grid; place-items: center; padding: 32px }
+    .card { width: min(720px, 92vw); background: var(--card); border: 1px solid color-mix(in oklab, var(--fg) 12%, transparent); border-radius: 18px; padding: 28px; box-shadow: 0 20px 60px color-mix(in oklab, #000 30%, transparent); }
+    h1 { margin: 0 0 6px; font-size: clamp(28px, 6vw, 48px); line-height: 1.05; letter-spacing:.2px }
+    p { margin: 8px 0 0; color: var(--muted) }
+    .pill { display:inline-flex; gap:8px; align-items:center; padding:6px 12px; border-radius:999px; border:1px solid color-mix(in oklab, var(--fg) 14%, transparent); font-size: 14px; margin-bottom: 10px }
+    .actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:18px }
+    .btn { display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; border:1px solid color-mix(in oklab, var(--fg) 14%, transparent); text-decoration:none; color:inherit }
+    .btn.-primary { background: linear-gradient(135deg, var(--brand), var(--ring)); color:#0c0d10; font-weight:700; border:none }
+    footer { margin-top: 18px; font-size: 14px; color: var(--muted) }
+    .logo { width: 56px; height: 56px; border-radius: 14px; display:grid; place-items:center; background: radial-gradient(120% 120% at 0% 0%, var(--brand), transparent 60%), radial-gradient(120% 120% at 100% 100%, var(--ring), transparent 60%), var(--card); border:1px solid color-mix(in oklab, var(--fg) 12%, transparent); box-shadow: inset 0 0 0 1px color-mix(in oklab, #000 45%, transparent) }
   </style>
 </head>
 <body>
-  <header>
-    <nav class="nav" aria-label="Główna nawigacja">
-      <div class="brand">Goju</div>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projekty</a></li>
-        <li><a href="#contact">Kontakt</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main class="container">
-    <section class="hero" id="home">
-      <div>
-        <span class="pill" aria-label="tagline">✨ dev + maker + vibes</span>
-        <h1>Cześć, tu Goju. I build things, czasem działają.</h1>
-        <p>Warszawa based. Odoo + plugins + hardware + coffee. Minimal site, zero bloat - just vibes.</p>
-        <div class="btns">
-          <a class="btn -fill" href="#projects">See projects</a>
-          <a class="btn" href="#contact">Say hello</a>
+  <main class="wrap">
+    <section class="card" aria-label="Intro">
+      <div style="display:flex; gap:16px; align-items:center; margin-bottom:8px">
+        <div class="logo" aria-hidden="true">G</div>
+        <div>
+          <div class="pill">Minimal personal site — placeholder</div>
+          <h1>Goju</h1>
+          <p>Developer & maker based in Warsaw. This page is a lightweight placeholder for my future site on GitHub Pages.</p>
         </div>
       </div>
-      <div class="avatar" aria-hidden="true">👋</div>
-    </section>
 
-    <section id="about">
-      <h2>About</h2>
-      <p>Short bio tutaj: who you are, co robisz, 2-3 zdania max. No corporate blah blah.</p>
-    </section>
-
-    <section id="projects">
-      <h2>Projekty</h2>
-      <div class="grid cols-3">
-        <article class="card">
-          <h3>BTS: Odoo Database Selector</h3>
-          <p>JetBrains plugin - szybkie przełączanie baz, smooth workflow.</p>
-        </article>
-        <article class="card">
-          <h3>Variant Mapping</h3>
-          <p>Odoo tool do mapowania wariantów - mniej klików, więcej życia.</p>
-        </article>
-        <article class="card">
-          <h3>Hardware stuff</h3>
-          <p>Arduino/servo/3D print - because why not.</p>
-        </article>
+      <p style="margin-top:14px">Where to find me:</p>
+      <div class="actions">
+        <!-- TODO: Replace links with your actual profiles -->
+        <a class="btn -primary" href="https://github.com/YOUR_USERNAME" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/YOUR_USERNAME/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="mailto:hello@example.com">Email</a>
       </div>
-    </section>
 
-    <section id="contact">
-      <h2>Kontakt</h2>
-      <p>Open to collab? Slide in:</p>
-      <div class="social">
-        <a class="btn" href="mailto:hello@example.com" aria-label="email">✉️ Email</a>
-        <a class="btn" href="#" aria-label="GitHub">🐙 GitHub</a>
-        <a class="btn" href="#" aria-label="LinkedIn">💼 LinkedIn</a>
-        <a class="btn" href="#" aria-label="YouTube">▶️ YouTube</a>
-      </div>
+      <footer>
+        <span>© <span id="year"></span> Goju. Built with plain HTML + CSS. Hosted on GitHub Pages.</span>
+      </footer>
     </section>
   </main>
 
-  <footer class="container" role="contentinfo">
-    <p>© <span id="y"></span> Goju. Built with pure HTML+CSS, no JS frameworks, no nonsense.</p>
-  </footer>
-
   <script>
-    // tiny helper - current year only
-    document.getElementById('y').textContent = new Date().getFullYear();
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+  
+  <!-- Deployment notes (remove if you like):
+    1) Create a repo named YOUR_USERNAME.github.io
+    2) Save this file as index.html at the repo root and push.
+    3) Replace placeholder links above.
+  -->
 </body>
 </html>
