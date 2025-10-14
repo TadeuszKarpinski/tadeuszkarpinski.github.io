@@ -4,55 +4,88 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Goju — Personal Site (Coming Soon)</title>
-  <meta name="description" content="Goju — developer & maker. Minimal placeholder site for GitHub Pages." />
+  <meta name="description" content="Goju — developer & maker. Minimal placeholder site for GitHub Pages with CSS animation." />
   <meta name="color-scheme" content="light dark" />
-  <meta property="og:title" content="Goju — Personal Site" />
-  <meta property="og:description" content="Developer & maker. Minimal placeholder site." />
-  <meta property="og:type" content="website" />
   <style>
     :root {
-      --bg:#0f1115; --fg:#f7f8fc; --muted:#a7adbd; --card:#171a21; --brand:#7c6cff; --ring:#50e3c2;
+      --bg:#0e1015; --fg:#f6f7fb; --muted:#a7adbd; --card:#171a21; --brand:#7c6cff; --accent:#50e3c2;
     }
     @media (prefers-color-scheme: light) {
       :root { --bg:#ffffff; --fg:#0f1222; --muted:#5b6173; --card:#f3f5fb; }
     }
-    * { box-sizing: border-box }
-    html { scroll-behavior: smooth }
-    body { margin: 0; font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; background: var(--bg); color: var(--fg); }
-    .wrap { min-height: 100svh; display: grid; place-items: center; padding: 32px }
-    .card { width: min(720px, 92vw); background: var(--card); border: 1px solid color-mix(in oklab, var(--fg) 12%, transparent); border-radius: 18px; padding: 28px; box-shadow: 0 20px 60px color-mix(in oklab, #000 30%, transparent); }
-    h1 { margin: 0 0 6px; font-size: clamp(28px, 6vw, 48px); line-height: 1.05; letter-spacing:.2px }
-    p { margin: 8px 0 0; color: var(--muted) }
-    .pill { display:inline-flex; gap:8px; align-items:center; padding:6px 12px; border-radius:999px; border:1px solid color-mix(in oklab, var(--fg) 14%, transparent); font-size: 14px; margin-bottom: 10px }
+    * { box-sizing:border-box }
+    html,body { height:100%; margin:0; font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; color:var(--fg); overflow:hidden }
+    body { background:var(--bg); position:relative; }
+
+    /* background animation */
+    .bg {
+      position:absolute; inset:0; overflow:hidden; z-index:-1;
+      background:radial-gradient(circle at 20% 20%, var(--brand), transparent 40%),
+                 radial-gradient(circle at 80% 80%, var(--accent), transparent 40%),
+                 radial-gradient(circle at 60% 10%, #ff66cc40, transparent 50%),
+                 var(--bg);
+      background-size:200% 200%;
+      animation: move-bg 18s ease-in-out infinite alternate;
+    }
+    @keyframes move-bg {
+      0% { background-position:0% 0%, 100% 100%, 50% 0%; }
+      100% { background-position:100% 100%, 0% 0%, 50% 100%; }
+    }
+
+    /* floating particles */
+    .particle {
+      position:absolute; border-radius:50%; opacity:.3; mix-blend-mode:screen;
+      background:var(--accent);
+      animation: float 12s ease-in-out infinite;
+    }
+    @keyframes float {
+      0% { transform:translateY(0) scale(1); opacity:.4 }
+      50% { transform:translateY(-40px) scale(1.2); opacity:.8 }
+      100% { transform:translateY(0) scale(1); opacity:.4 }
+    }
+
+    .wrap { min-height:100svh; display:grid; place-items:center; padding:32px }
+    .card { width:min(720px,92vw); background:color-mix(in oklab, var(--card) 90%, transparent); border:1px solid color-mix(in oklab, var(--fg) 12%, transparent); border-radius:18px; padding:28px; backdrop-filter:blur(10px); box-shadow:0 20px 60px color-mix(in oklab,#000 35%,transparent); animation:pop 1s ease-out both }
+    @keyframes pop { from{transform:scale(.95);opacity:0} to{transform:scale(1);opacity:1} }
+
+    h1 { margin:0 0 6px; font-size:clamp(28px,6vw,48px); line-height:1.05 }
+    p { margin:8px 0 0; color:var(--muted) }
+    .pill { display:inline-flex; gap:8px; align-items:center; padding:6px 12px; border-radius:999px; border:1px solid color-mix(in oklab, var(--fg) 14%, transparent); font-size:14px; margin-bottom:10px; backdrop-filter:blur(6px) }
     .actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:18px }
-    .btn { display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; border:1px solid color-mix(in oklab, var(--fg) 14%, transparent); text-decoration:none; color:inherit }
-    .btn.-primary { background: linear-gradient(135deg, var(--brand), var(--ring)); color:#0c0d10; font-weight:700; border:none }
-    footer { margin-top: 18px; font-size: 14px; color: var(--muted) }
-    .logo { width: 56px; height: 56px; border-radius: 14px; display:grid; place-items:center; background: radial-gradient(120% 120% at 0% 0%, var(--brand), transparent 60%), radial-gradient(120% 120% at 100% 100%, var(--ring), transparent 60%), var(--card); border:1px solid color-mix(in oklab, var(--fg) 12%, transparent); box-shadow: inset 0 0 0 1px color-mix(in oklab, #000 45%, transparent) }
+    .btn { display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; border:1px solid color-mix(in oklab, var(--fg) 14%, transparent); text-decoration:none; color:inherit; transition:.3s }
+    .btn:hover { transform:translateY(-2px); box-shadow:0 4px 12px color-mix(in oklab, var(--accent) 20%, transparent) }
+    .btn.-primary { background:linear-gradient(135deg,var(--brand),var(--accent)); color:#0c0d10; font-weight:700; border:none }
+    footer { margin-top:18px; font-size:14px; color:var(--muted) }
+    .logo { width:56px; height:56px; border-radius:14px; display:grid; place-items:center; background:radial-gradient(120% 120% at 0% 0%, var(--brand), transparent 60%), radial-gradient(120% 120% at 100% 100%, var(--accent), transparent 60%), var(--card); border:1px solid color-mix(in oklab, var(--fg) 12%, transparent) }
   </style>
 </head>
 <body>
+  <div class="bg"></div>
+  <div class="particle" style="width:50px;height:50px;left:10%;top:70%;animation-delay:0s"></div>
+  <div class="particle" style="width:80px;height:80px;left:60%;top:40%;animation-delay:2s"></div>
+  <div class="particle" style="width:100px;height:100px;left:80%;top:80%;animation-delay:4s"></div>
+  <div class="particle" style="width:40px;height:40px;left:30%;top:20%;animation-delay:1s"></div>
+
   <main class="wrap">
     <section class="card" aria-label="Intro">
-      <div style="display:flex; gap:16px; align-items:center; margin-bottom:8px">
-        <div class="logo" aria-hidden="true">G</div>
+      <div style="display:flex;gap:16px;align-items:center;margin-bottom:8px">
+        <div class="logo">G</div>
         <div>
-          <div class="pill">Minimal personal site — placeholder</div>
+          <div class="pill">✨ Minimal personal site — placeholder</div>
           <h1>Goju</h1>
-          <p>Developer & maker based in Warsaw. This page is a lightweight placeholder for my future site on GitHub Pages.</p>
+          <p>Developer & maker based in Warsaw. This page is a minimal animated placeholder for my future site on GitHub Pages.</p>
         </div>
       </div>
 
-      <p style="margin-top:14px">Where to find me:</p>
+      <p style="margin-top:14px">Find me online:</p>
       <div class="actions">
-        <!-- TODO: Replace links with your actual profiles -->
         <a class="btn -primary" href="https://github.com/YOUR_USERNAME" target="_blank" rel="noopener">GitHub</a>
         <a class="btn" href="https://www.linkedin.com/in/YOUR_USERNAME/" target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn" href="mailto:hello@example.com">Email</a>
       </div>
 
       <footer>
-        <span>© <span id="year"></span> Goju. Built with plain HTML + CSS. Hosted on GitHub Pages.</span>
+        <span>© <span id="year"></span> Goju. Built with pure HTML + CSS animations. Hosted on GitHub Pages.</span>
       </footer>
     </section>
   </main>
@@ -60,11 +93,5 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
-  
-  <!-- Deployment notes (remove if you like):
-    1) Create a repo named YOUR_USERNAME.github.io
-    2) Save this file as index.html at the repo root and push.
-    3) Replace placeholder links above.
-  -->
 </body>
 </html>
